@@ -50,4 +50,4 @@
     *   **A2: 1. 与.obsidian平级的.OChat-chats下 2. 插件根目录下的data.json里。**
 *   **Q3: 1.**
 ---
-*Developed by Gemini-3-pro-preview, not Zeta*
+*Developed by Gemini-3-Pro-Preview, not Zeta*

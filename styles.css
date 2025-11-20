@@ -144,6 +144,22 @@
   /* Ensure text is selectable */
 }
 
+/* Markdown Content Styling - Make rendered markdown selectable */
+.OChat-markdown-content {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+/* Ensure all children in markdown content are selectable */
+.OChat-markdown-content * {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
 /* HTML Content Styling */
 .OChat-message-content img {
   max-width: 100%;

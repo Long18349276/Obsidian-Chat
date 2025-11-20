@@ -152,7 +152,7 @@ export default class ObsidianVCPPlugin extends Plugin {
 
         const namingAgent: import('./types').Agent = {
             ...DEFAULT_AGENT,
-            model: this.settings.topicModel || '',
+            model: this.settings.topicModel || 'deepseek-ai/DeepSeek-V3.2-Exp',
             systemPrompt: '总结聊天话题，10字以内',
             maxTokens: 50
         };

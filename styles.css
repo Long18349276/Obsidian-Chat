@@ -1,0 +1,499 @@
+/* Obsidian VCPToolBox Plugin Styles */
+
+.OChat-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  gap: 10px;
+}
+
+/* 工具栏样式 */
+.OChat-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--background-modifier-border);
+}
+
+.OChat-toolbar-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-ui-small);
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.OChat-toolbar-button:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.OChat-toolbar-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.OChat-icon {
+  font-size: 14px;
+}
+
+.OChat-model-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  font-size: var(--font-ui-small);
+}
+
+.OChat-model-selector label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.OChat-model-input {
+  padding: 4px 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  font-family: var(--font-interface);
+  font-size: var(--font-ui-small);
+  min-width: 150px;
+}
+
+.OChat-model-input:focus {
+  outline: none;
+  border-color: var(--interactive-accent);
+}
+
+.OChat-model-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.OChat-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+}
+
+/* Message Container & Bubbles */
+.OChat-message-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+}
+
+.OChat-message-container.user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.OChat-message-container.assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.OChat-message {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.OChat-message-user {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+.OChat-message-assistant {
+  background-color: var(--background-primary-alt);
+  color: var(--text-normal);
+  border: 1px solid var(--background-modifier-border);
+}
+
+.OChat-message-role {
+  font-size: 0.75em;
+  font-weight: 600;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.OChat-message-content {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.5;
+  user-select: text;
+  /* Ensure text is selectable */
+}
+
+/* HTML Content Styling */
+.OChat-message-content img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin-top: 8px;
+  display: block;
+}
+
+/* Message Actions */
+.OChat-message-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.OChat-message-container:hover .OChat-message-actions {
+  opacity: 1;
+}
+
+.OChat-action-button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.OChat-action-button:hover {
+  background-color: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+/* Loading Animation */
+.OChat-loading {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.OChat-loading-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+  animation: OChat-loading-bounce 1.4s infinite ease-in-out both;
+}
+
+.OChat-loading-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.OChat-loading-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes OChat-loading-bounce {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Input Area */
+.OChat-input-container {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+  align-items: flex-end;
+}
+
+.OChat-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  font-family: var(--font-interface);
+  font-size: var(--font-ui-medium);
+  resize: vertical;
+  min-height: 60px;
+  max-height: 200px;
+}
+
+.OChat-input:focus {
+  outline: none;
+  border-color: var(--interactive-accent);
+}
+
+.OChat-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.OChat-send-button {
+  padding: 10px 20px;
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--font-ui-medium);
+  transition: opacity 0.2s;
+  min-height: 40px;
+}
+
+.OChat-send-button:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.OChat-send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Scrollbar styling */
+.OChat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.OChat-messages::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+.OChat-messages::-webkit-scrollbar-thumb {
+  background: var(--background-modifier-border);
+  border-radius: 4px;
+}
+
+.OChat-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Tool Request Styling */
+.OChat-tool-request {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  margin: 8px 0;
+  overflow: hidden;
+}
+
+.OChat-tool-request summary {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--background-secondary-alt);
+  font-size: 0.9em;
+  user-select: none;
+}
+
+.OChat-tool-request summary:hover {
+  background-color: var(--background-modifier-hover);
+}
+
+.OChat-tool-name {
+  font-weight: 600;
+  color: var(--interactive-accent);
+}
+
+.OChat-agent-name {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+.OChat-tool-request-content {
+  padding: 12px;
+  border-top: 1px solid var(--background-modifier-border);
+  background-color: var(--background-primary);
+  font-size: 0.9em;
+}
+
+.OChat-tool-field {
+  margin-bottom: 8px;
+}
+
+.OChat-tool-field:last-child {
+  margin-bottom: 0;
+}
+
+.OChat-tool-field pre {
+  margin: 4px 0 0 0;
+  padding: 8px;
+  background-color: var(--background-secondary);
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--font-monospace);
+  font-size: 0.9em;
+}
+
+/* Cited Notes Styling */
+.OChat-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+}
+
+.OChat-cited-notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 4px;
+}
+
+.OChat-cited-note-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background-color: var(--background-primary-alt);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 16px;
+  font-size: 0.85em;
+  color: var(--text-normal);
+}
+
+.OChat-note-name {
+  font-weight: 500;
+}
+
+.OChat-remove-note-button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  /* 新增/修改 */
+  width: 20px;
+  /* 设置固定宽度 */
+  height: 20px;
+  /* 设置固定高度，必须与宽度一致 */
+  padding: 0;
+  /* 清除 padding，防止撑大 */
+}
+
+.OChat-remove-note-button:hover {
+  color: var(--text-error);
+  background-color: var(--background-modifier-hover);
+}
+
+.OChat-input-wrapper {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  align-items: flex-end;
+}
+
+.OChat-cite-button {
+  padding: 0 16px;
+  background-color: var(--background-primary);
+  color: var(--text-muted);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+  height: 40px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.OChat-cite-button:hover:not(:disabled) {
+  border-color: var(--interactive-accent);
+  color: var(--interactive-accent);
+  background-color: var(--background-modifier-hover);
+}
+
+.OChat-cite-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Update existing input container to remove padding/bg since it's now inside input-area */
+.OChat-input-container {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/* ==============================================
+   修复用户气泡(User Bubble)内的引用笔记样式
+   ============================================== */
+
+/* 1. 针对在 .OChat-message-user 内部的 chip 进行样式重写 */
+.OChat-message-user .OChat-cited-note-chip {
+  /* 背景改为半透明白色，形成“磨砂玻璃”效果，完美融入青色背景 */
+  background-color: rgba(255, 255, 255, 0.2);
+
+  /* 边框也改为半透明白，去掉原本脏脏的灰色边框 */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  /* 强制文字颜色跟随气泡文字颜色（通常是白色） */
+  color: inherit;
+
+  /* 稍微调整间距 */
+  margin: 4px 0;
+  padding: 4px 10px;
+}
+
+/* 2. 鼠标悬停时的效果（可选） */
+.OChat-message-user .OChat-cited-note-chip:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 3. 确保里面的文字颜色正确 */
+.OChat-message-user .OChat-cited-note-chip .OChat-note-name {
+  font-weight: 500;
+  color: var(--text-on-accent);
+  /* 强制使用高对比度颜色(通常是白色) */
+}
+
+/* 4. (可选) 如果那个 📄 图标太暗，可以用滤镜把它变亮 */
+.OChat-message-user .OChat-cited-note-chip .OChat-note-icon {
+  filter: brightness(0) invert(1);
+  /* 这会让 Emoji 变白（如果浏览器支持） */
+  opacity: 0.9;
+}

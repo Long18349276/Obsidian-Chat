@@ -1,0 +1,9 @@
+{
+    "id": "obsidian-vcp",
+    "name": "OChat",
+    "version": "0.1.0",
+    "minAppVersion": "0.15.0",
+    "description": "一个Obsidian插件，使在Obsidian中连接VCPToolBox使用比较方便。",
+    "author": "Zeta",
+    "isDesktopOnly": false
+}

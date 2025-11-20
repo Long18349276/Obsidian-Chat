@@ -27,7 +27,7 @@
 2.  **配置 API**：
     *   进入插件设置页面。
     *   填写 **API Endpoint** (API 地址) 和 **API Key**。
-    *   配置默认的模型名称 (如 `gpt-3.5-turbo`, `gemini-pro` 等)。
+    *   配置默认的模型名称 (如 `gemini-2.5-flash-preview-09-2025`, `gemini-3-pro` 等)。
 
 3.  **创建 Agent**：
     *   在设置中或聊天界面添加新的 Agent。

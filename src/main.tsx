@@ -152,8 +152,8 @@ export default class ObsidianVCPPlugin extends Plugin {
 
         const namingAgent: import('./types').Agent = {
             ...DEFAULT_AGENT,
-            model: this.settings.topicModel || 'gemini-2.5-flash',
-            systemPrompt: 'You are a helpful assistant that summarizes conversation topics.',
+            model: this.settings.topicModel || '',
+            systemPrompt: '总结聊天话题，10字以内',
             maxTokens: 50
         };
 

@@ -42,7 +42,7 @@ export default class ObsidianVCPPlugin extends Plugin {
 
         this.addCommand({
             id: 'new-OChat-chat',
-            name: 'New OChat',
+            name: 'New chat',
             callback: async () => {
                 const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE_OCHAT);
                 if (leaves.length > 0) {

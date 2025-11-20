@@ -1,4 +1,4 @@
-# Obsidian VCPToolBox Plugin
+# Obsidian Chat Plugin
 
 这是一个为 Obsidian 设计的 AI 助手插件，旨在提供流畅的对话体验和强大的功能，帮助你更好地在 Obsidian 中使用 VCPToolBox。
 

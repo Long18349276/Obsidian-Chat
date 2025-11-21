@@ -1,7 +1,7 @@
 import { App, PluginSettingTab, Setting, Notice } from 'obsidian';
 import ObsidianVCPPlugin from './main';
 import { AgentConfigModal } from './AgentConfigModal';
-import { DEFAULT_AGENT, Agent } from './types';
+import { DEFAULT_AGENT, Agent, createDefaultAgent } from './types';
 
 export class OChatSettingTab extends PluginSettingTab {
     plugin: ObsidianVCPPlugin;
@@ -191,7 +191,7 @@ export class OChatSettingTab extends PluginSettingTab {
                 .setCta()
                 .onClick(() => {
                     const newAgent: Agent = {
-                        ...DEFAULT_AGENT,
+                        ...createDefaultAgent(),
                         id: Date.now().toString(),
                         name: 'New Agent',
                     };

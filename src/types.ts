@@ -58,6 +58,28 @@ export const DEFAULT_AGENT: Agent = {
     maxTokens: 30000,
 };
 
+// Factory function to create a fresh default agent with deep-copied arrays
+export function createDefaultAgent(): Agent {
+    return {
+        id: 'default',
+        name: 'Default Agent',
+        model: '',
+        systemPrompt: '你是一个AI助手，生活在Obsidian中。',
+        systemPrompts: [{ id: 'default', name: 'Default', content: '你是一个AI助手，生活在Obsidian中。' }],
+        activeSystemPromptId: 'default',
+        temperature: 0.7,
+        maxTokens: 30000,
+    };
+}
+
+// Deep copy helper for Agent objects
+export function deepCopyAgent(agent: Agent): Agent {
+    return {
+        ...agent,
+        systemPrompts: agent.systemPrompts.map(p => ({ ...p })),
+    };
+}
+
 export const DEFAULT_SETTINGS: OChatSettings = {
     apiEndpoint: '',
     apiKey: '',

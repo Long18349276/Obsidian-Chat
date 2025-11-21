@@ -1,5 +1,5 @@
 import { App, Modal, Setting, Notice, ButtonComponent } from 'obsidian';
-import { Agent, DEFAULT_AGENT } from './types';
+import { Agent, DEFAULT_AGENT, createDefaultAgent, deepCopyAgent } from './types';
 import { OpenAIClient } from './OpenAIClient';
 
 export class AgentConfigModal extends Modal {
@@ -9,7 +9,7 @@ export class AgentConfigModal extends Modal {
 
     constructor(app: App, agent: Agent | null, apiClient: OpenAIClient, onSave: (agent: Agent) => void) {
         super(app);
-        this.agent = agent ? { ...agent } : { ...DEFAULT_AGENT, id: Date.now().toString(), name: 'New Agent' };
+        this.agent = agent ? deepCopyAgent(agent) : { ...createDefaultAgent(), id: Date.now().toString(), name: 'New Agent' };
 
         // Migration/Initialization for systemPrompts
         if (!this.agent.systemPrompts || this.agent.systemPrompts.length === 0) {

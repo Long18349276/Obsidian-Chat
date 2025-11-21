@@ -95,14 +95,14 @@ export class ChatHistoryModal extends Modal {
                 .setButtonText('Select All')
                 .onClick(() => {
                     this.filteredChats.forEach(c => this.selectedChatsForExport.add(c.id));
-                    this.renderList(listContainer);
+                    this.render();
                 });
 
             new ButtonComponent(exportActions)
                 .setButtonText('Deselect All')
                 .onClick(() => {
                     this.selectedChatsForExport.clear();
-                    this.renderList(listContainer);
+                    this.render();
                 });
 
             new ButtonComponent(exportActions)

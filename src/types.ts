@@ -18,12 +18,11 @@ export interface Agent {
 
 // Chat session
 export interface Chat {
-    id: string;
+    id: string; // Now stores timestamp as string
     agentId: string; // Linked agent ID
     title: string;
     manualTitle?: boolean; // If true, auto-naming will be skipped
     tags?: string[]; // Custom tags for the conversation
-    createdAt: number;
     updatedAt: number;
     messages: Message[];
 }

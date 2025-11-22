@@ -110,7 +110,7 @@ export class ChatView extends ItemView {
                 this.render();
             },
             async (chatToDelete) => {
-                await this.plugin.chatStorage.deleteChat(chatToDelete.id);
+                await this.plugin.chatStorage.deleteChat(chatToDelete.id, chatToDelete.agentId);
                 // Refresh if current chat was deleted
                 if (this.currentChat?.id === chatToDelete.id) {
                     await this.loadOrCreateChat();
@@ -132,7 +132,7 @@ export class ChatView extends ItemView {
                 const chatsToDelete = chats.filter(c => c.title === 'New Chat');
 
                 for (const chat of chatsToDelete) {
-                    await this.plugin.chatStorage.deleteChat(chat.id);
+                    await this.plugin.chatStorage.deleteChat(chat.id, chat.agentId);
                 }
 
                 // If current chat was deleted, load a new one or create one

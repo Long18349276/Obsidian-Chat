@@ -100,10 +100,18 @@ export default class ObsidianVCPPlugin extends Plugin {
     }
 
     async generateChatTitle(chat: import('./types').Chat, force: boolean = false): Promise<void> {
-        if (!force && (!this.settings.autoTopicNaming || chat.manualTitle)) return;
+        console.log('[OChat] generateChatTitle called - force:', force, 'autoTopicNaming:', this.settings.autoTopicNaming, 'manualTitle:', chat.manualTitle);
+
+        if (!force && (!this.settings.autoTopicNaming || chat.manualTitle)) {
+            console.log('[OChat] generateChatTitle skipped due to settings/manual title');
+            return;
+        }
 
         const messages = chat.messages;
-        if (messages.length < 2) return;
+        if (messages.length < 2) {
+            console.log('[OChat] Not enough messages for title generation (need 2, have', messages.length, ')');
+            return;
+        }
 
         // Find 3rd assistant message index
         let assistantCount = 0;
@@ -131,6 +139,8 @@ export default class ObsidianVCPPlugin extends Plugin {
             }
         }
 
+        console.log('[OChat] Message context - thirdAssistantIndex:', thirdAssistantIndex, 'thirdLastUserIndex:', thirdLastUserIndex);
+
         let contextMessages: import('./types').Message[] = [];
 
         if (thirdAssistantIndex !== -1) {
@@ -150,6 +160,8 @@ export default class ObsidianVCPPlugin extends Plugin {
 
         contextMessages = Array.from(new Set(contextMessages));
 
+        console.log('[OChat] Using', contextMessages.length, 'messages for context');
+
         const namingAgent: import('./types').Agent = {
             ...DEFAULT_AGENT,
             model: this.settings.topicModel || 'deepseek-ai/DeepSeek-V3.2-Exp',
@@ -163,18 +175,24 @@ export default class ObsidianVCPPlugin extends Plugin {
         ];
 
         try {
+            console.log('[OChat] Calling API to generate title with model:', namingAgent.model);
             let title = '';
             await this.apiClient.sendMessage(namingAgent, namingMessages, (chunk) => {
                 title += chunk;
             });
 
             title = title.trim().replace(/^["']|["']$/g, '');
+            console.log('[OChat] Generated title:', title);
+
             if (title) {
                 chat.title = title;
                 await this.chatStorage.saveChat(chat);
+                console.log('[OChat] Title saved successfully');
+            } else {
+                console.log('[OChat] Empty title generated, skipping save');
             }
         } catch (error) {
-            console.error('Failed to auto-name chat:', error);
+            console.error('[OChat] Failed to auto-name chat:', error);
         }
     }
 }

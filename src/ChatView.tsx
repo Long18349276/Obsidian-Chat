@@ -18,6 +18,7 @@ export class ChatView extends ItemView {
     private isLoading = false;
     private streamingMessage = '';
     private abortController: AbortController | null = null;
+    private isAutoNaming = false;
 
     constructor(leaf: WorkspaceLeaf, plugin: ObsidianVCPPlugin) {
         super(leaf);
@@ -213,7 +214,24 @@ export class ChatView extends ItemView {
     }
 
     private async autoNameChat(): Promise<void> {
-        if (!this.currentChat || !this.plugin.settings.autoTopicNaming || this.currentChat.manualTitle) return;
+        if (!this.currentChat) return;
+
+        console.log('[OChat] autoNameChat called - autoTopicNaming:', this.plugin.settings.autoTopicNaming, 'manualTitle:', this.currentChat.manualTitle, 'isAutoNaming:', this.isAutoNaming);
+
+        if (!this.plugin.settings.autoTopicNaming) {
+            console.log('[OChat] Auto-naming is disabled in settings, skipping');
+            return;
+        }
+
+        if (this.currentChat.manualTitle) {
+            console.log('[OChat] Chat has manual title, skipping auto-naming');
+            return;
+        }
+
+        if (this.isAutoNaming) {
+            console.log('[OChat] Auto-naming already in progress, skipping');
+            return;
+        }
 
         const messages = this.currentChat.messages;
         let assistantCount = 0;
@@ -221,9 +239,23 @@ export class ChatView extends ItemView {
             if (msg.role === 'assistant') assistantCount++;
         }
 
-        if (assistantCount < 3) return;
+        console.log('[OChat] Assistant message count:', assistantCount);
 
-        await this.plugin.generateChatTitle(this.currentChat);
+        if (assistantCount < 3) {
+            console.log('[OChat] Not enough assistant messages for auto-naming (need 3, have', assistantCount, ')');
+            return;
+        }
+
+        this.isAutoNaming = true;
+        try {
+            console.log('[OChat] Starting auto-naming process');
+            await this.plugin.generateChatTitle(this.currentChat);
+            console.log('[OChat] Auto-naming completed successfully');
+        } catch (error) {
+            console.error('[OChat] Auto-naming failed:', error);
+        } finally {
+            this.isAutoNaming = false;
+        }
     }
 
     private async handleSendMessage(content: string): Promise<void> {
@@ -287,8 +319,8 @@ export class ChatView extends ItemView {
             this.currentChat.updatedAt = Date.now();
             await this.plugin.chatStorage.saveChat(this.currentChat);
 
-            // Trigger auto-naming
-            this.autoNameChat();
+            // Trigger auto-naming (await to ensure proper sequencing)
+            await this.autoNameChat();
 
         } catch (error) {
             new Notice('Failed to send message: ' + error.message);
